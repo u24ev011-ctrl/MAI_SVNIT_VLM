@@ -7,11 +7,9 @@ class TPVLM(nn.Module):
         self.k = k
 
     def forward(self, tokens):
-        # tokens: [B, C, H, W] -> flatten tokens
-        B, C, H, W = tokens.shape
-        flat = tokens.view(B, C, -1)  # [B, C, N]
-        # simple magnitude-based pruning (placeholder)
-        scores = flat.abs().mean(dim=1)  # [B, N]
-        topk = torch.topk(scores, k=min(self.k, scores.size(-1)), dim=-1).indices
-        pruned = torch.gather(flat, 2, topk.unsqueeze(1).expand(-1, C, -1))
+        # tokens: [B, N, C]
+        B, N, C = tokens.shape
+        scores = tokens.abs().mean(dim=-1)  # [B,N]
+        topk = torch.topk(scores, k=min(self.k, N), dim=-1).indices
+        pruned = torch.gather(tokens, 1, topk.unsqueeze(-1).expand(-1, -1, C))
         return pruned

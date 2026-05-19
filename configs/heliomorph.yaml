@@ -2,6 +2,13 @@ project:
   name: HelioMorph-Edge
   seed: 42
 
+output:
+  dir: ./outputs
+
+export:
+  onnx_path: ./exports/heliomorph.onnx
+  openvino_dir: ./exports/openvino
+
 data:
   root: ./datasets/solar
   img_size: 224
@@ -17,11 +24,13 @@ training:
   batch_size: 16
   lr: 0.0003
   weight_decay: 0.01
+  label_smoothing: 0.05
 
 model:
-  tsve_dim: 64
+  tsve_dim: 128
   token_prune_k: 64
   prompt_mode: adaptive
+  num_classes: 6
 
 edge:
   quantize: true
