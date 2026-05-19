@@ -1,0 +1,4 @@
+{
+  "short_prompt": "Detect solar panel fault type: {classes}",
+  "detailed_prompt": "Analyze panel surface patterns and thermal cues. Classify fault type among: {classes}. Provide reasoning."
+}

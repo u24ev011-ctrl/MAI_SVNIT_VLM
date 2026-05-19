@@ -1,0 +1,29 @@
+project:
+  name: HelioMorph-Edge
+  seed: 42
+
+data:
+  root: ./datasets/solar
+  img_size: 224
+  classes: [Bird-drop, Clean, Dusty, Electrical-damage, Physical-Damage, Snow-Covered]
+  split: [0.7, 0.15, 0.15]
+  augment:
+    - random_flip
+    - random_rotation
+    - color_jitter
+
+training:
+  epochs: 30
+  batch_size: 16
+  lr: 0.0003
+  weight_decay: 0.01
+
+model:
+  tsve_dim: 64
+  token_prune_k: 64
+  prompt_mode: adaptive
+
+edge:
+  quantize: true
+  export_onnx: true
+  target: jetson
