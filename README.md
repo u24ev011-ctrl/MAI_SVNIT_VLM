@@ -10,7 +10,11 @@ This repository provides a full, lightweight, edge-deployable framework for UAV-
 - **Prompt-adaptive semantic router**
 - **Tiny memory-bank few-shot adapter**
 - **Explainability engine** (Grad-CAM heatmaps + textual reasoning)
-- **Edge optimizations** (ONNX + OpenVINO)
+- **Edge optimizations** (ONNX + OpenVINO + TensorRT)
+- **Evaluation** (metrics + confusion matrix)
+- **FLOPs & parameter reporting**
+- **Ablation scripts**
+- **Device benchmark** (latency)
 
 ## Dataset
 Default: **Kaggle Solar Panel Images Clean and Faulty**
@@ -30,10 +34,21 @@ python src/infer.py --config configs/heliomorph.yaml --image path/to/image.jpg
 python src/explain.py --config configs/heliomorph.yaml --image path/to/image.jpg --out outputs/heatmap.jpg
 ```
 
+## Evaluation
+```bash
+python src/evaluate.py --config configs/heliomorph.yaml
+```
+
+## Benchmark
+```bash
+python evaluation/benchmark.py --config configs/heliomorph.yaml
+```
+
 ## Edge Export
 ```bash
 python edge/export_onnx.py --config configs/heliomorph.yaml
 python edge/optimize_openvino.py --onnx exports/heliomorph.onnx --outdir exports/openvino
+python edge/trt_build.py --onnx exports/heliomorph.onnx --outdir exports/tensorrt
 ```
 
 ## Repo Structure

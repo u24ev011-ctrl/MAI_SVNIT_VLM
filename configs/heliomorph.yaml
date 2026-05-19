@@ -8,6 +8,7 @@ output:
 export:
   onnx_path: ./exports/heliomorph.onnx
   openvino_dir: ./exports/openvino
+  tensorrt_dir: ./exports/tensorrt
 
 data:
   root: ./datasets/solar
